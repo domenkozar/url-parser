@@ -17,15 +17,16 @@ blog =
   s "blog" </> int </> string
 ```
 
-Here is a slightly fancier example. This parser turns URLs like `/blog/42` and `/search/badger` into a nice structure that is easier to work with in Elm:
+Here is a slightly fancier example. This parser turns URLs like `/`, `/blog/42` and `/search/badger` into a nice structure that is easier to work with in Elm:
 
 ```elm
-type DesiredPage = Blog Int | Search String
+type DesiredPage = Home | Blog Int | Search String
 
 desiredPage : Parser (DesiredPage -> a) a
 desiredPage =
   oneOf
-    [ format Blog (s "blog" </> int)
+    [ format Home (s "")
+    , format Blog (s "blog" </> int)
     , format Search (s "search" </> string)
     ]
 ```
